@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
                 .body(ErrorResponse.of(400, ex.getMessage()));
     }
 
+    // Handles @Valid annotation failures (e.g., blank name, negative amount, missing idempotency key)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getFieldErrors().stream()
